@@ -6,7 +6,8 @@ import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 
-import { retriever } from './utils/retriever.js'
+// import { retriever } from './utils/retriever.js'
+import { initializeRetriever } from './utils/retriever.js'; 
 import { combineDocuments } from './utils/combineDocuments.js'
 import { formatConvHistory } from './utils/formatConvHistory.js'
 
@@ -27,6 +28,8 @@ app.use(express.static("public"));
 
 const convHistory = []
 
+// For testing the Google Gemini API
+
 // import { GoogleGenAI } from "@google/genai";
 // // The client gets the API key from the environment variable `GEMINI_API_KEY`.
 // const ai = new GoogleGenAI({});
@@ -37,7 +40,7 @@ const convHistory = []
 //     contents: "Hi, This is Amar",
 //   });
 //   console.log(response.text);
-// }y
+// }
 // main();
 
 // Prompts
@@ -60,7 +63,7 @@ app.post("/chat", async (req, res) => {
         console.log(question);
 
         const llm = new ChatGoogleGenerativeAI({
-            apiKey: "AIzaSyB61kdcrD576F2m01rh8eq7PPeDAT9oI2U",
+            apiKey: process.env.GEMINI_API_KEY,
             modelName: "gemini-2.5-flash",
             // safetySettings
         });
@@ -100,7 +103,7 @@ app.post("/chat", async (req, res) => {
 
         const retrieverChain = RunnableSequence.from([
             prevResult => prevResult.standalone_question,
-            retriever,
+            initializeRetriever,
             combineDocuments
         ])
         const answerChain = answerPrompt
