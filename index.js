@@ -47,7 +47,7 @@ app.post("/chat", async (req, res) => {
         console.log(question);
 
         const llm = new ChatGoogleGenerativeAI({
-            apiKey: "",
+            apiKey: "AIzaSyB61kdcrD576F2m01rh8eq7PPeDAT9oI2U",
             modelName: "gemini-1.5-flash",
             // safetySettings
         });
