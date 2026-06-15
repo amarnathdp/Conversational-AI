@@ -20,12 +20,25 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-const llm = new ChatGoogleGenerativeAI({
-    apiKey: "AIzaSyACT8KjqrkOD0HGt_eqLgkzK-PTaz_ZsKQ",
-    modelName: "gemini-1.5-flash",
-});
+// const llm = new ChatGoogleGenerativeAI({
+//     apiKey: "AIzaSyACT8KjqrkOD0HGt_eqLgkzK-PTaz_ZsKQ",
+//     modelName: "gemini-1.5-flash",
+// });
 
 const convHistory = []
+
+// import { GoogleGenAI } from "@google/genai";
+// // The client gets the API key from the environment variable `GEMINI_API_KEY`.
+// const ai = new GoogleGenAI({});
+// async function main() {
+//   const response = await ai.models.generateContent({ 
+//     // apiKey: "AIzaSyB61kdcrD576F2m01rh8eq7PPeDAT9oI2U",
+//     model: "gemini-2.5-flash",
+//     contents: "Hi, This is Amar",
+//   });
+//   console.log(response.text);
+// }y
+// main();
 
 // Prompts
 // const answerTemplate = `You are a helpful and enthusiastic support bot who can answer a given question.
@@ -48,7 +61,7 @@ app.post("/chat", async (req, res) => {
 
         const llm = new ChatGoogleGenerativeAI({
             apiKey: "AIzaSyB61kdcrD576F2m01rh8eq7PPeDAT9oI2U",
-            modelName: "gemini-1.5-flash",
+            modelName: "gemini-2.5-flash",
             // safetySettings
         });
 
